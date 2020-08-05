@@ -15,8 +15,8 @@ CLASS lcl_sflight_alv DEFINITION.
 
     METHODS:
       get_all_sflight_data,
-      display_sflight_alv,
-      new_method.
+      set_alv_functions,
+      display_sflight_alv.
 
   PROTECTED SECTION.
 
@@ -41,6 +41,8 @@ CLASS lcl_sflight_alv IMPLEMENTATION.
         cl_demo_output=>display( lx_msg ).
     ENDTRY.
 
+    set_alv_functions( ).
+
 *   Display ALV
     lo_alv->display( ).
 
@@ -51,6 +53,17 @@ CLASS lcl_sflight_alv IMPLEMENTATION.
     SELECT *
     FROM sflight
     INTO TABLE lt_sflight.
+
+  ENDMETHOD.
+
+
+  METHOD set_alv_functions.
+
+    DATA(lo_alv_functions_list) = lo_alv->get_functions( ).
+    lo_alv_functions_list->set_all( if_salv_c_bool_sap=>true ).
+
+    lo_alv_functions_list->set_sort_asc( if_salv_c_bool_sap=>false ).
+    lo_alv_functions_list->set_sort_desc( if_salv_c_bool_sap=>false ).
 
   ENDMETHOD.
 

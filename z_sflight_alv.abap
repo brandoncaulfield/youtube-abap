@@ -16,6 +16,7 @@ CLASS lcl_sflight_alv DEFINITION.
     METHODS:
       get_all_sflight_data,
       set_alv_functions,
+      set_alv_columns,
       display_sflight_alv.
 
   PROTECTED SECTION.
@@ -43,6 +44,8 @@ CLASS lcl_sflight_alv IMPLEMENTATION.
 
     set_alv_functions( ).
 
+    set_alv_columns( ).
+
 *   Display ALV
     lo_alv->display( ).
 
@@ -61,9 +64,30 @@ CLASS lcl_sflight_alv IMPLEMENTATION.
 
     DATA(lo_alv_functions_list) = lo_alv->get_functions( ).
     lo_alv_functions_list->set_all( if_salv_c_bool_sap=>true ).
+*    lo_alv_functions_list->set_sort_asc( if_salv_c_bool_sap=>false ).
+*    lo_alv_functions_list->set_sort_desc( if_salv_c_bool_sap=>false ).
 
-    lo_alv_functions_list->set_sort_asc( if_salv_c_bool_sap=>false ).
-    lo_alv_functions_list->set_sort_desc( if_salv_c_bool_sap=>false ).
+  ENDMETHOD.
+
+  METHOD set_alv_columns.
+
+    TRY.
+        DATA(lo_columns) = lo_alv->get_columns( ).
+
+* Hide the client (MANDT) column
+        DATA(lo_column_mandt) = lo_columns->get_column( 'MANDT' ).
+        lo_column_mandt->set_visible( if_salv_c_bool_sap=>false ).
+
+
+* Rename Occupied Column to 'Seats Occupied'
+        DATA(lo_column_seatsocc) = lo_columns->get_column( 'SEATSOCC' ).
+        lo_column_seatsocc->set_short_text( 'Seats Occ.' ).
+        lo_column_seatsocc->set_medium_text( 'Seats Occupied' ).
+        lo_column_seatsocc->set_long_text( 'Seats Occupied' ).
+      CATCH cx_salv_not_found INTO DATA(lx_msg). " ALV: General Error Class (Checked During Syntax Check)
+        cl_demo_output=>display( lx_msg ).
+
+    ENDTRY.
 
   ENDMETHOD.
 

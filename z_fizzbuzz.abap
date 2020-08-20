@@ -44,37 +44,3 @@ ENDCLASS.
 START-OF-SELECTION.
 
   lcl_fizzbuzz=>create( )->run( ).
-
-
-
-*DATA: tab TYPE TABLE OF string.
-*
-*tab = VALUE #(
-*  FOR i = 1 WHILE i <= 100 (
-*    COND string( LET r3 = i MOD 3
-*                     r5 = i MOD 5 IN
-*                 WHEN r3 = 0 AND r5 = 0 THEN |FIZZBUZZ|
-*                 WHEN r3 = 0            THEN |FIZZ|
-*                 WHEN r5 = 0            THEN |BUZZ|
-*                 ELSE i ) ) ).
-*
-*cl_demo_output=>write( tab ).
-*cl_demo_output=>display( ).
-
-*cl_demo_output=>display( VALUE stringtab( FOR i = 1 WHILE i <= 100 ( COND #(  LET m3 = i MOD 3 m5 = i MOD 5 IN
-*                                                                             WHEN m3 = 0 AND m5 = 0 THEN |FIZZBUZZ|
-*                                                                             WHEN m3 = 0            THEN |FIZZ|
-*                                                                             WHEN m5 = 0            THEN |BUZZ|
-*                                                                             ELSE i ) ) ) ).
-
-
-*DATA(lv_3) = 3.
-*DATA(lv_5) = 5.
-*DATA(lv_15) = 15.
-*
-*DATA(lv_count) = 5.
-*DATA(lv_result) = ''.
-*
-*lv_result = lv_count MOD lv_3.
-*
-*WRITE lv_result.

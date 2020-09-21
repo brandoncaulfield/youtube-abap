@@ -1,10 +1,10 @@
-CLASS lcl|_reduce_test DEFINITION CREATE PRIVATE FINAL.
+CLASS lcl_reduce_test DEFINITION CREATE PRIVATE FINAL.
 
 PUBLIC SECTION.
 
     CLASS-METHODS: create
         RETURNING
-            VALUE(ro_obj) TYPE REF TO lcl|_reduce_test.
+            VALUE(ro_obj) TYPE REF TO lcl_reduce_test.
 
     METHODS: run.
 
@@ -13,10 +13,10 @@ PRIVATE SECTION.
 
 ENDCLASS.
 
-CLASS lcl|_reduce_test IMPLEMENTATION.
+CLASS lcl_reduce_test IMPLEMENTATION.
 
     METHOD create.
-        ro_obj = NEW lcl|_reduce_test( ).
+        ro_obj = NEW lcl_reduce_test( ).
     ENDMETHOD.
 
     METHOD run.
